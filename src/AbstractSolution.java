@@ -36,7 +36,14 @@ public abstract class AbstractSolution extends Frame {
 		//g2d.translate(frameWidth/2,frameHeight/2); //pour déplacer l'origine si besoin
 
 		// mettre ici un appel de drawSolutionk avec une liste d'arguments adaptés, par exemple : 
-		drawSolutionk(g2d, 380,15,40,profondeur);
+		// POUR TESTER FKSOLUTION :
+		//drawSolutionk(g2d, 380,15,40,profondeur,0,0);
+		
+		// POUR TESTER FKSOLUTIONCERCLE : 
+		// drawSolutionk(g2d, 220,450,250,profondeur,0,0);
+			
+		drawSolutionk(g2d, 220,450,250,profondeur,0,0);
+		
 	}
 
 	/** drawSolutionk 
