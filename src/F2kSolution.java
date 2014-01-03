@@ -1,39 +1,47 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 
-public class FkSolutionCercle  extends AbstractSolution {
+public class F2kSolution  extends AbstractSolution {
 
 	
-	public FkSolutionCercle(int profondeur) {
+	public F2kSolution(int profondeur) {
 		super(profondeur);
 	}
 	
 	@Override
 	public void drawSolutionk(Graphics drawingArea, int... arg) {
 		
+		//	Récupérer les paramètres de l'itération
+		//	précédente
 		int ancienDiametre = arg[0];
 		int ancienX = arg[1];
 		int ancienY = arg[2];
-		int profondeurRestant = arg[3];
-		if(profondeurRestant <= 0) { return; }
+		int profondeurRestante = arg[3];
 		int orientation = arg[4];
 		int nbIteration = arg[5];
 		
+			
+		//	Vérifier la condition d'arrêt
+		if(profondeurRestante <= 0) { return; }
+	
 
-		
-		this.profondeur = profondeurRestant;
-		this.profondeur --;
+		//	Décrémenter la profondeur restante et
+		//	la réassigner
+		profondeurRestante --;		
+		this.profondeur = profondeurRestante;
 
-//		System.out.println("\nIteration n°" + this.profondeur);
-//		
-//		System.out.println("Dessin de ");
-//		
-//		System.out.println("\tX :\t\t" + ancienX);
-//		System.out.println("\tY :\t\t" + ancienY);
-//		
-//		System.out.println("\tDiametre :\t" + ancienDiametre);
-		
+		//	Dessiner le cercle courant
 		drawingArea.drawOval(ancienX, ancienY, ancienDiametre,ancienDiametre);		
+
+		//	Remplir le cercle courant
+		Color oldColor = drawingArea.getColor();
+		drawingArea.setColor(new Color(0,255,0));
+		drawingArea.fillOval(ancienX, ancienY, ancienDiametre,ancienDiametre);
+		drawingArea.setColor(oldColor);
+		
+		
+		//	Recalculer l'ensemble des nouvelles valeurs
 		int nouveauDiametre = ancienDiametre/2;
 		
 		int nouveauXDroite = ancienX + ancienDiametre;
@@ -48,8 +56,12 @@ public class FkSolutionCercle  extends AbstractSolution {
 		int nouveauXGauche =ancienX  - nouveauDiametre;
 		int nouveauYGauche = (ancienY)+(ancienDiametre/2) - nouveauDiametre/2;
 		
+		
+		//	Créer une copie de la profondeur restante
 		int prof = this.profondeur;
 
+		
+		//	Gérer le cas particuler de la toute première itération
 		if(nbIteration == 0) {
 			nbIteration ++;
 
@@ -61,6 +73,7 @@ public class FkSolutionCercle  extends AbstractSolution {
 		}
 		
 		
+		//	Générer 3 récursions en traitant le cas des orientations
 		switch(orientation) {
 		case 0:
 			this.drawSolutionk(drawingArea, new int[] {nouveauDiametre,nouveauXHaut,nouveauYHaut, prof, 0,nbIteration});
@@ -87,9 +100,5 @@ public class FkSolutionCercle  extends AbstractSolution {
 		
 			break;
 		}
-		
-
-		
-
 	}
 }

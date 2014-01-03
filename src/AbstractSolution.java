@@ -1,12 +1,18 @@
 import java.awt.*;                    // Pour  Graphics, Frame
 import java.awt.event.WindowAdapter;  // Pour fermer
 import java.awt.event.WindowEvent;    // Pour fermer
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 
 public abstract class AbstractSolution extends Frame {
 	protected static final int WIDTH = 1366;       // taille initiale de la frame 
 	protected static final int HEIGHT = 768;
 	protected int profondeur; // profondeur de récursivité
 
+	public static int[] params = new int[]{};
+	
 	public AbstractSolution(int profondeur) {
 
 		if(profondeur < 1) {
@@ -20,6 +26,7 @@ public abstract class AbstractSolution extends Frame {
 		this.profondeur= profondeur;
 		addWindowListener(new WindowHandler());  // pour fermer
 		setTitle("Dessins recursifs au niveau : "+profondeur);
+		setAlwaysOnTop(true);
 	}
 
 	private class WindowHandler extends WindowAdapter {
@@ -42,8 +49,9 @@ public abstract class AbstractSolution extends Frame {
 		// POUR TESTER FKSOLUTIONCERCLE : 
 		// drawSolutionk(g2d, 220,450,250,profondeur,0,0);
 			
-		drawSolutionk(g2d, 220,450,250,profondeur,0,0);
+		// drawSolutionk(g2d, 200,600,300,profondeur,0,0, 60, 20, 0, 2);
 		
+		drawSolutionk(g2d, params);
 	}
 
 	/** drawSolutionk 
@@ -53,6 +61,7 @@ public abstract class AbstractSolution extends Frame {
 	 *    int ... arg : les coordonnées, longueur et autres si besoin, et profondeur de récursivité
 	 **/ 
 	public abstract void drawSolutionk(Graphics drawingArea, int ... arg) ;
+
 
 }
 

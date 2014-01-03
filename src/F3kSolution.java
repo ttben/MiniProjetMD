@@ -1,8 +1,8 @@
 import java.awt.Graphics;
 
 
-public class FkSolutionCarree extends AbstractSolution {
-	public FkSolutionCarree(int profondeur) {
+public class F3kSolution extends AbstractSolution {
+	public F3kSolution(int profondeur) {
 		super(profondeur);
 	}
 	
